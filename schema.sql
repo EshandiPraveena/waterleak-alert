@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS waterleak CHARACTER SET utf8mb4;
+USE waterleak;
+CREATE TABLE users(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(80),email VARCHAR(120) UNIQUE,pass_hash VARCHAR(255),created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE properties(id INT AUTO_INCREMENT PRIMARY KEY,user_id INT,name VARCHAR(80),device_key CHAR(32) UNIQUE,FOREIGN KEY(user_id) REFERENCES users(id));
+CREATE TABLE sensors(id INT AUTO_INCREMENT PRIMARY KEY,property_id INT,label VARCHAR(60),type ENUM('leak','flow'),FOREIGN KEY(property_id) REFERENCES properties(id));
+CREATE TABLE readings(id BIGINT AUTO_INCREMENT PRIMARY KEY,sensor_id INT,value DECIMAL(10,2),created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(sensor_id) REFERENCES sensors(id));
+CREATE TABLE alerts(id INT AUTO_INCREMENT PRIMARY KEY,property_id INT,sensor_id INT,message VARCHAR(200),resolved TINYINT DEFAULT 0,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(property_id) REFERENCES properties(id));
+CREATE TABLE plumbers(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(80),area VARCHAR(60),skill VARCHAR(80),phone VARCHAR(30),rating DECIMAL(2,1));
+CREATE TABLE repair_requests(id INT AUTO_INCREMENT PRIMARY KEY,property_id INT,plumber_id INT,issue VARCHAR(200),status ENUM('Sent','Accepted','Completed') DEFAULT 'Sent',created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+INSERT INTO plumbers(name,area,skill,phone,rating) VALUES('Nimal Perera','Colombo 05','Pipe repair, tanks','+94771234567',4.8),('Kasun Silva','Nugegoda','Leak detection','+94712345678',4.6);

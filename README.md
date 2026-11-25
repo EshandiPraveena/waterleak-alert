@@ -6,15 +6,21 @@ Sometimes a pipe or tap leaks inside a wall or under the floor. Nobody notices f
 What the project does
 
 • Small sensors are placed under sinks and near tanks. When they touch water, they know there is a leak.
+
 • The sensors send a message over Wi-Fi to a website.
+
 • The website shows you a warning, like "Leak at the Kitchen sink".
+
 • It also shows charts of how much water you use each day, week and month.
+
 • It has a list of plumbers, so you can ask one to come and fix the problem.
 
 Why it's useful
 
 • You find leaks early, before they cause damage.
+
 • You waste less water and save money.
+
 • Everything is in one place, with no need to search for a plumber yourself.
 
 What I built for you
